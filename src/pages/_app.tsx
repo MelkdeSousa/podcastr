@@ -6,15 +6,18 @@ import Header from '../components/Header'
 import Player from '../components/Player'
 
 import styles from '../styles/app.module.scss'
+import { PlayerProvider } from '../contexts/PlayerContext'
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <div className={styles.wrapper}>
-    <main>
-      <Header />
-      <Component {...pageProps} />
-    </main>
+    <PlayerProvider>
+      <main>
+        <Header />
+        <Component {...pageProps} />
+      </main>
 
-    <Player />
+      <Player />
+    </PlayerProvider>
   </div>
 )
 

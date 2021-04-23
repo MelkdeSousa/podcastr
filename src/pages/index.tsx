@@ -6,6 +6,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import api from '../services/api'
 import convertDurationToTimeString from '../utils/convertDurationToTimeString'
+import { usePlayer } from '../contexts/PlayerContext'
 
 import styles from './home.module.scss'
 
@@ -25,7 +26,9 @@ interface HomeProps {
   latestEpisodes: [Episode, Episode]
 }
 
-const Index = ({ allEpisodes, latestEpisodes }: HomeProps) => {
+const Home = ({ allEpisodes, latestEpisodes }: HomeProps) => {
+  const { play } = usePlayer()
+
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
@@ -49,7 +52,7 @@ const Index = ({ allEpisodes, latestEpisodes }: HomeProps) => {
                 <span>episode.durationAsString</span>
               </div>
 
-              <button type='button'>
+              <button type='button' onClick={() => play(episode)}>
                 <img src='/play-green.svg' alt='Tocar episódio' />
               </button>
             </li>
@@ -141,4 +144,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Index
+export default Home
